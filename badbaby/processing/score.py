@@ -31,6 +31,7 @@ OTHER_TRIGGER_MAP = {
 IN_NAMES = ("std", "ba", "wa")
 IN_NUMBERS = (103, 104, 105)
 tabdir = "/media/ktavabi/ALAYA/data/ilabs/badbaby/paradigm/data"
+offsets = dict(am=1000, ids=10000)
 
 
 def score(p, subjects):
@@ -51,10 +52,11 @@ def score(p, subjects):
             fname_out = op.join(out_dir, f"ALL_{run_name % subj}-eve.lst")
 
             events, _ = extract_expyfun_events(fname)[:2]
-            events[:, 2] += 100
             if run_name in ("%s_am", "%s_ids"):
+                events[:, 2] += offsets[run_name.split('_')[-1]]
                 mne.write_events(fname_out, events)
                 continue
+            events[:, 2] += 100
             # Find the right mismatch .tab file
             raw = mne.io.read_raw_fif(fname, allow_maxshield="yes")
             exp_subj = subj.split("_")[1].rstrip("ab")

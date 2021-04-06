@@ -80,12 +80,12 @@ fetch_raw:
       "bad_102",
       "bad_103",
       "bad_104",
-      bad_105',
+      "bad_105",
       "bad_109",
       "bad_110",
       "bad_113",
       "bad_114",
-      "bad_116a",
+      "bad_116",
       "bad_116b",
       "bad_117a",
       "bad_118",
@@ -224,6 +224,10 @@ fetch_raw:
   acq_ssh: kasga.ilabs.uw.edu
   acq_dir:
     - /brainstudio/bad_baby
+    # /data06/larsoner/for_hank/brainstudio
+  acq_exclude:
+    - /brainstudio/bad_baby/bad_baby
+    - /brainstudio/bad_baby/bad_baby
 
 scoring:
   score: null
@@ -245,7 +249,7 @@ preprocessing:
       bad_110: [],
       bad_113: ['MEG1823'],
       bad_114: ['MEG2112, MEG0212'],
-      bad_116a: [],
+      bad_116: [],
       bad_116b: ['MEG0313'],
       bad_117a: [],
       bad_118: [],
@@ -320,15 +324,17 @@ preprocessing:
     int_order: 6
     ext_order: 3
     tsss_dur: 10.
-    st_correlation: 0.95
+    st_correlation: 0.98
     trans_to: twa
-    cont_as_esss: False
+    cont_as_esss: True
   filtering:
     lp_cut: 50
     lp_trans: auto
+    hp_cut: 0.5
+    hp_trans: auto
     filter_length: auto
-    fir_design: firwin2
-    phase: zero-double
+    fir_design: firwin
+    phase: zero
   ssp:
     cont_hp: 20
     cont_hp_trans: 2
@@ -344,7 +350,7 @@ preprocessing:
       bad_110: [[1, 1, 0], [0, 0, 0], [1, 1, 0]],
       bad_113: [[1, 1, 0], [0, 0, 0], [1, 1, 0]],
       bad_114: [[1, 1, 0], [0, 0, 0], [1, 1, 0]],
-      bad_116a: [[1, 1, 0], [0, 0, 0], [1, 1, 0]],
+      bad_116: [[1, 1, 0], [0, 0, 0], [1, 1, 0]],
       bad_116b: [[1, 1, 0], [0, 0, 0], [1, 1, 0]],
       bad_117a: [[1, 1, 0], [0, 0, 0], [1, 1, 0]],
       bad_118: [[1, 1, 0], [0, 0, 0], [1, 1, 0]],
@@ -407,13 +413,55 @@ preprocessing:
     ecg_t_lims: [-0.04, 0.04]
     proj_sfreq: 200
     proj_ave: True
-    proj_meg: separate
+    proj_meg: combined
 
 epoching:
   tmin: 0
   tmax: 1
   baseline: Null
+  bmin: -0.1
+  bmax: 0
   autoreject_thresholds: True
   autoreject_types: ["grad"]
   auto_bad_reject: "auto"
   auto_bad_meg_thresh: 12
+  analyses: [All, Individual, Oddball, AM, IDs]
+  in_names: [std, ba, wa,
+             tone,
+             s1, s2, s3, s4, s5]
+  in_numbers: [103, 104, 105,
+               1003,
+               10001, 10002, 10003, 10004, 10005]
+  out_names: [[All],
+              [standard, ba, wa],
+              [standard, deviant],
+              [tone],
+              [s1, s2, s3, s4, s5]]
+  out_numbers: [[ 1,  1,  1,  1,  1,  1,  1,  1,  1],
+                [ 1,  2,  3, -1, -1, -1, -1, -1, -1],
+                [ 1,  2,  2, -1, -1, -1, -1, -1, -1],
+                [-1, -1, -1,  1, -1, -1, -1, -1, -1],
+                [-1, -1, -1, -1,  1,  2,  3,  4,  5]]
+  must_match: [[], [], [], []]
+
+covariance:
+  cov_method: empirical  # eventually shrunk is better, just use for speed for now
+  compute_rank: True
+  cov_rank: null
+  cov_rank_method: compute_rank
+  force_erm_cov_rank_full: False
+
+report:
+  source_alignment: False
+  bem: False
+  covariance: True
+  whitening: [{ analysis: All, name: All }]
+  sensor:
+    [
+      { analysis: All, name: All, times: "peaks", proj: False },
+      { analysis: All, name: All, times: "peaks" },
+      { analysis: All, name: All, times: "peaks", proj: "reconstruct" },
+      { analysis: Oddball, name: standard, times: "peaks" },
+      { analysis: Oddball, name: deviant, times: "peaks" },
+      { analysis: AM, name: tone, times: "peaks" },
+    ]

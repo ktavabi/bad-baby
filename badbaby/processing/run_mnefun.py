@@ -92,11 +92,15 @@ params = mnefun.read_params(
     op.join(Path(__file__).parents[1], "processing", "badbaby.yml")
 )
 params.ecg_channel = ecg_channel
-params.subjects = ["bad_101", "bad_102"]
+params.score = score
 
 # Set what will run
 good, bad = list(), list()
 use_subjects = params.subjects
+use_subjects = ["bad_101", "bad_102"]
+# 119a
+# use_subjects = use_subjects[use_subjects.index('bad_119a'):]
+continue_on_error = False
 for subject in use_subjects:
     params.subject_indices = [params.subjects.index(subject)]
     default = False
@@ -107,19 +111,20 @@ for subject in use_subjects:
             do_score=default,
             push_raw=default,
             do_sss=True,
-            fetch_sss=default,
-            do_ch_fix=default,
+            fetch_sss=True,
+            do_ch_fix=True,
             gen_ssp=True,
-            apply_ssp=default,
-            write_epochs=default,
-            gen_covs=default,
-            gen_fwd=default,
-            gen_inv=default,
-            gen_report=default,
+            apply_ssp=True,
+            write_epochs=True,
+            gen_covs=True,
+            gen_fwd=False,  # no structurals/surrogates, always False
+            gen_inv=False,
+            gen_report=True,
             print_status=default,
         )
     except Exception:
-        raise
+        if not continue_on_error:
+            raise
         traceback.print_exc()
         bad.append(subject)
     else:
