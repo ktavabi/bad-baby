@@ -421,6 +421,7 @@ epoching:
   baseline: Null
   bmin: -0.1
   bmax: 0
+  epochs_proj: delayed
   autoreject_thresholds: True
   autoreject_types: ["grad"]
   auto_bad_reject: "auto"
