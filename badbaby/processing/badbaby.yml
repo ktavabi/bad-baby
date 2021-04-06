@@ -442,7 +442,7 @@ epoching:
                 [ 1,  2,  2, -1, -1, -1, -1, -1, -1],
                 [-1, -1, -1,  1, -1, -1, -1, -1, -1],
                 [-1, -1, -1, -1,  1,  2,  3,  4,  5]]
-  must_match: [[], [], [], []]
+  must_match: [[], [], [], [], []]
 
 covariance:
   cov_method: empirical  # eventually shrunk is better, just use for speed for now
