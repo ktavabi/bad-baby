@@ -1,34 +1,24 @@
 #!/usr/bin/env python
-"""mnefun.py: MNEFUN preprocessing pipeline:
+"""MNEFUN preprocessing pipeline.
 
-    Notes:
-    Subjects whose names are incorrect and need to be manually copied and renamed:
+Subjects whose data were not on the server under their given names with all
+runs were 104, 114 , 120b, 127b, 130a, 203, 209a, 213 , 217	bad_231b, 304a,
+314a, 921b, 109, 117a, 122a, 128a, 131a, 205, 211a, 214 , 225b, bad_301a, 310a,
+316b, 925b, 110, 119a, 124a, 128b, 131b, 207, 212 , 215a, 229b, bad_302a, 312b,
+921a. Files were uploaded to /data06/larsoner/for_hank/brainstudio with
+variants of:
 
-    - bad_208a  bad_208_a
-    - bad_209a  bad_209
-    - bad_301a  bad_301
-    - bad_921a  bad_921
-    - bad_925a  bad_925
-    - bad_302a  bad_302
-    - bad_116a  bad_116
-    - bad_211a  bad_211
+$ rsync -a --rsh="ssh -o KexAlgorithms=diffie-hellman-group1-sha1" --partial --progress --include="*_raw.fif" --include="*_raw-1.fif" --exclude="*" /media/ktavabi/ALAYA/data/ilabs/badbaby/*/bad_114/raw_fif/* larsoner@kasga.ilabs.uw.edu:/data06/larsoner/for_hank/brainstudio
+>>> mne.io.read_raw_fif('../mismatch/bad_114/raw_fif/bad_114_mmn_raw.fif', allow_maxshield='yes').info['meas_date'].strftime('%y%m%d')
 
-    Subjects whose data were not on the server and needed to be uploaded were
-    [bad_114, bad_214, bad_110, bad_117a, bad_215a, bad_217, bad_119a].
-    Files were uploaded to brainstudio with variants of:
+Then repackaged manually into brainstudio/bad_baby/bad_*/*/ directories
+based on the recording dates (or just using 111111 for simplicity).
 
-    $ rsync -a --rsh="ssh -o KexAlgorithms=diffie-hellman-group1-sha1" --partial --progress --include="*_raw.fif" --include="*_raw-1.fif" --exclude="*" /media/ktavabi/ALAYA/data/ilabs/badbaby/*/bad_114/raw_fif/* larsoner@kasga.ilabs.uw.edu:/data06/larsoner/for_hank/brainstudio
-    >>> mne.io.read_raw_fif('../mismatch/bad_114/raw_fif/bad_114_mmn_raw.fif', allow_maxshield='yes').info['meas_date'].strftime('%y%m%d')
+Subjects who did not complete preprocessing:
 
-    Then repackaged manually into brainstudio/bad_baby/bad_*/*/ directories
-    based on the recording dates.
+- 223a: Preproc (Only 13/15 good ECG epochs found)
 
-    Subjects who did not complete preprocessing:
-
-    - 223a: Preproc (Only 13/15 good ECG epochs found)
-
-    This is because for about half the time their HPI was no good, so throw them
-    out.
+About half the time their HPI was no good, so throw them out.
 """
 
 # TODO: @larsoner sort out combined channel SSP & determine whether `cont_as_esss` is beneficial @larsoner
@@ -78,11 +68,6 @@ bads = dict(
     (f"bad_{k}", [v]) for k, v in zip(meg_features["id"], meg_features["badch"])
 )
 
-lst = [[1, 2, 0], [0, 0, 0], [1, 1, 0]]  # ECG|EOG|ERM: grad/meg/eeg
-pool = [lst[:] for _ in range(len(meg_features))]
-proj_nums = dict((f"bad_{k}", v) for k, v in zip(meg_features["id"], pool))
-
-
 good, bad = list(), list()
 subjects = sorted(f"bad_{id_}" for id_ in meg_features["id"])
 assert set(subjects) == set(ecg_channel)
@@ -97,10 +82,9 @@ params.score = score
 # Set what will run
 good, bad = list(), list()
 use_subjects = params.subjects
-use_subjects = ["bad_101", "bad_102"]
-# 119a
-# use_subjects = use_subjects[use_subjects.index('bad_119a'):]
-continue_on_error = False
+# use_subjects = use_subjects[use_subjects.index('bad_212'):]
+# use_subjects = use_subjects[use_subjects.index('bad_209a'):][:1]
+continue_on_error = True
 for subject in use_subjects:
     params.subject_indices = [params.subjects.index(subject)]
     default = False
@@ -108,17 +92,15 @@ for subject in use_subjects:
         mnefun.do_processing(
             params,
             fetch_raw=default,
-            do_score=default,
-            push_raw=default,
-            do_sss=default,
-            fetch_sss=default,
-            do_ch_fix=default,
-            gen_ssp=default,
-            apply_ssp=default,
+            do_score=True,
+            push_raw=True,
+            do_sss=True,
+            fetch_sss=True,
+            do_ch_fix=True,
+            gen_ssp=True,
+            apply_ssp=True,
             write_epochs=True,
             gen_covs=True,
-            gen_fwd=False,  # no structurals/surrogates, always False
-            gen_inv=False,
             gen_report=True,
             print_status=default,
         )
