@@ -19,9 +19,11 @@ Subjects who did not complete preprocessing:
 - 223a: Preproc (Only 13/15 good ECG epochs found)
 
 About half the time their HPI was no good, so throw them out.
-"""
+"""  # noqa: E501
 
-# TODO: @larsoner sort out combined channel SSP & determine whether `cont_as_esss` is beneficial @larsoner
+# TODO:
+# 1. Deal with failures
+# 2. Rerun all epochs and covariance with updated tmin/tmax
 
 import os.path as op
 import traceback
@@ -60,13 +62,12 @@ meg_features = (
     .filter_on("complete == 1", complement=False)
 )
 
-ecg_channel = dict(
-    (f"bad_{k}", v) for k, v in zip(meg_features["id"], meg_features["ecg"])
-)
-
-bads = dict(
-    (f"bad_{k}", [v]) for k, v in zip(meg_features["id"], meg_features["badch"])
-)
+ecg_channel = {
+    f"bad_{k}": v for k, v in zip(meg_features["id"], meg_features["ecg"])
+}
+bads = {
+    f"bad_{k}": [v] for k, v in zip(meg_features["id"], meg_features["badch"])
+}
 
 good, bad = list(), list()
 subjects = sorted(f"bad_{id_}" for id_ in meg_features["id"])
@@ -82,8 +83,18 @@ params.score = score
 # Set what will run
 good, bad = list(), list()
 use_subjects = params.subjects
-# use_subjects = use_subjects[use_subjects.index('bad_212'):]
 # use_subjects = use_subjects[use_subjects.index('bad_209a'):][:1]
+
+# Still need to fix:
+# use_subjects = ['bad_105']  # RuntimeError: Only 5/1262 good ECG epochs found
+# use_subjects = ['bad_116a']  # evoked[0].info['meas_id'] is not None / IndexError: list index out of range
+# use_subjects = ['bad_130a']  # no good epochs for ERM SSP
+# use_subjects = ['bad_225b']  # no good epochs for ERM SSP
+# use_subjects = ['bad_226b']  # no good epochs for ERM SSP
+# use_subjects = ['bad_302a']  # Expected 2 ERM projectors for channel type grad based on proj_nums but got 0 in /mnt/bakraid/larsoner/kam/badbaby/badbaby/data/bad_302a/sss_pca_fif/preproc_cont-proj.fif
+# use_subjects = ['bad_310b']  # RuntimeError: Only 7/1527 good ECG epochs found
+# Re-run epoching/cov/report for all to make sure no events are missing.
+
 continue_on_error = True
 for subject in use_subjects:
     params.subject_indices = [params.subjects.index(subject)]
@@ -91,17 +102,16 @@ for subject in use_subjects:
     try:
         mnefun.do_processing(
             params,
-            fetch_raw=default,
-            do_score=True,
-            push_raw=True,
-            do_sss=True,
-            fetch_sss=True,
-            do_ch_fix=True,
-            gen_ssp=True,
-            apply_ssp=True,
-            write_epochs=True,
-            gen_covs=True,
-            gen_report=True,
+            fetch_raw=True,
+            do_score=default,
+            do_sss=default,
+            fetch_sss=default,
+            do_ch_fix=default,
+            gen_ssp=default,
+            apply_ssp=default,
+            write_epochs=default,
+            gen_covs=default,
+            gen_report=default,
             print_status=default,
         )
     except Exception:

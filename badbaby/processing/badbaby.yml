@@ -14,7 +14,7 @@ fetch_raw:
       "bad_110",
       "bad_113",
       "bad_114",
-      "bad_116",
+      "bad_116a",
       "bad_116b",
       "bad_117a",
       "bad_118",
@@ -88,6 +88,7 @@ fetch_raw:
     # Hank migrates the files to brainstudio
   acq_exclude:
     - /brainstudio/bad_baby/bad_baby
+    - ^/brainstudio/bad_baby/bad_119b
     - ^/brainstudio/bad_baby/bad_120b
     - ^/brainstudio/bad_baby/bad_122a
     - ^/brainstudio/bad_baby/bad_124a
@@ -102,7 +103,9 @@ fetch_raw:
     - ^/brainstudio/bad_baby/bad_207
     - ^/brainstudio/bad_baby/bad_212
     - ^/brainstudio/bad_baby/bad_213
+    - ^/brainstudio/bad_baby/bad_218a
     - ^/brainstudio/bad_baby/bad_225b
+    - ^/brainstudio/bad_baby/bad_226b
     - ^/brainstudio/bad_baby/bad_229b
     - ^/brainstudio/bad_baby/bad_231b
     - ^/brainstudio/bad_baby/bad_304a
@@ -136,11 +139,12 @@ preprocessing:
         bad_110: [MEG0142, MEG0422, MEG0432, MEG1722],
         bad_113: [MEG0142, MEG1223, MEG1722, MEG1823, MEG2131],
         bad_114: [MEG0142, MEG0212, MEG0422, MEG2112, MEG2623, MEG2011],
-        bad_116: [MEG0142, MEG0413, MEG1213, MEG1533, MEG1722, MEG2623, MEG1941, MEG2641],
+        bad_116a: [MEG0142, MEG0413, MEG1213, MEG1533, MEG1722, MEG2623, MEG1941, MEG2641],
         bad_116b: [MEG0122, MEG0313, MEG0933, MEG1413, MEG1823, MEG2112, MEG2623, MEG2643, MEG1931],
         bad_117a: [MEG0142, MEG0422, MEG1112, MEG1823, MEG2623],
         bad_118: [MEG0142, MEG1442],
         bad_119a: [MEG0142, MEG1543, MEG1722, MEG2623],
+        bad_119b: [MEG0122, MEG0713, MEG1433, MEG2112, MEG2623, MEG2643, MEG1631, MEG1931],
         bad_120b: [MEG0122, MEG0713, MEG1433, MEG2112, MEG2643, MEG1631, MEG1821, MEG1931, MEG2531],
         bad_122a: [MEG0142, MEG0422, MEG1543, MEG2623],
         bad_122b: [MEG0122, MEG0333, MEG0812, MEG1223, MEG1432, MEG1543, MEG2112, MEG2623, MEG2643, MEG1931, MEG2611],
@@ -149,7 +153,7 @@ preprocessing:
         bad_124b: [MEG2112, MEG2623, MEG2643, MEG1931],
         bad_125a: [MEG0122, MEG0313, MEG1542, MEG2112, MEG2532, MEG2623, MEG2643],
         bad_127a: [MEG0122, MEG0413, MEG0422, MEG0933, MEG1723, MEG2112, MEG2113, MEG2623, MEG1931],
-        bad_127b: [MEG0122, MEG0222, MEG2112, MEG2532, MBG2623, MEG2643, MEG0911],
+        bad_127b: [MEG0122, MEG0222, MEG2112, MEG2532, MEG2623, MEG2643, MEG0911],
         bad_128a: [MEG0422, MEG0933, MEG1413, MEG1523, MEG2112, MEG2623, MEG2643, MEG0611, MEG1041],
         bad_128b: [MEG0122, MEG2112, MEG2443, MEG2623, MEG2643, MEG1141],
         bad_130a: [MEG0621, MEG0933, MEG2112, MEG1831],
@@ -179,7 +183,7 @@ preprocessing:
         bad_229b: [MEG0122, MEG0433, MEG2112, MEG2612, MEG2623, MEG2643],
         bad_231b: [MEG0122, MEG0212, MEG0422, MEG0933, MEG2112, MEG2113, MEG2512, MEG2542, MEG2623],
         bad_301a: [MEG0142, MEG2113, MEG2432, MEG2532, MEG2623, MEG0611],
-        bad_302a: [MEG0122, MEG0142, MEG0422, MEG02623],
+        bad_302a: [MEG0122, MEG0142, MEG0422, MEG2623],
         bad_304a: [MEG0122, MEG0142, MEG0212, MEG0413, MEG2112, MEG1941, MEG2431],
         bad_309a: [MEG0122, MEG0432, MEG1042, MEG1542, MEG2112, MEG2542, MEG2623, MEG2643, MEG1931],
         bad_310a: [MEG0122, MEG0322, MEG1023, MEG2112, MEG2623, MEG2643],
@@ -233,8 +237,10 @@ preprocessing:
     proj_meg: combined
 
 epoching:
-  tmin: 0
-  tmax: 1
+  # These limits should work for AM and ASSR, IDs will need a separate
+  # epoching step anyway
+  tmin: -0.2
+  tmax: 1.3
   baseline: Null
   bmin: -0.1
   bmax: 0
@@ -243,6 +249,8 @@ epoching:
   autoreject_types: ["grad"]
   auto_bad_reject: "auto"
   auto_bad_meg_thresh: 12
+  allow_resample: True
+  # Hopefully just IDs warn here
   on_missing: warn
   analyses: [All, Individual, Oddball, AM, IDs]
   in_names: [std, ba, wa, tone, s1, s2, s3, s4, s5]
