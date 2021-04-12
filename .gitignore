@@ -152,3 +152,4 @@ cython_debug/
 .DS_Store
 data/
 badbaby/.DS_Store
+*.code-workspace
