@@ -1,6 +1,5 @@
 general:
   subjects_dir: Null
-  work_dir: badbaby/data
 
 fetch_raw:
   subjects:
@@ -488,7 +487,7 @@ epoching:
       [-1, -1, -1, 1, -1, -1, -1, -1, -1],
       [-1, -1, -1, -1, 1, 2, 3, 4, 5],
     ]
-  must_match: [[], [], [], [], []]
+  must_match: [[], [1, 2, 3], [1, 2], [], []]
 
 covariance:
   cov_method: shrunk

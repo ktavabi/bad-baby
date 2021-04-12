@@ -73,6 +73,7 @@ assert len(subjects) == 68
 params = mnefun.read_params(
     op.join(Path(__file__).parents[1], "processing", "badbaby.yml")
 )
+params.work_dir = "/media/ktavabi/ALAYA/data/ilabs/badbaby"
 params.ecg_channel = ecg_channel
 params.score = score
 
@@ -89,15 +90,16 @@ for subject in use_subjects:
         mnefun.do_processing(
             params,
             fetch_raw=default,
-            do_score=default,
-            do_sss=default,
+            do_score=True,
+            push_raw=default,
+            do_sss=True,
             fetch_sss=default,
-            do_ch_fix=default,
-            gen_ssp=default,
-            apply_ssp=default,
-            write_epochs=default,
-            gen_covs=default,
-            gen_report=default,
+            do_ch_fix=True,
+            gen_ssp=True,
+            apply_ssp=True,
+            write_epochs=True,
+            gen_covs=True,
+            gen_report=True,
             print_status=default,
         )
     except Exception:
