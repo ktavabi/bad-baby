@@ -37,7 +37,7 @@ ERF = mne.combine_evoked([ERFS[cc] for cc in conditions], weights=[-1, 1])
 ERF.pick_types(meg=True)
 ERF.plot_joint()
 
-# TODO
+# TODO:
 # [] group level MMN interval windowing around deviant peak latency
 # [] rolling average ERF magnitude in peak latency window for classifier.
 # [] individual subject data for ERF conditions
