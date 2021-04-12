@@ -21,10 +21,6 @@ Subjects who did not complete preprocessing:
 About half the time their HPI was no good, so throw them out.
 """  # noqa: E501
 
-# TODO:
-# 1. Deal with failures
-# 2. Rerun all epochs and covariance with updated tmin/tmax
-
 import os.path as op
 import traceback
 from pathlib import Path
@@ -83,26 +79,16 @@ params.score = score
 # Set what will run
 good, bad = list(), list()
 use_subjects = params.subjects
-# use_subjects = use_subjects[use_subjects.index('bad_209a'):][:1]
+# use_subjects = ['bad_130a', 'bad_225b', 'bad_226b']
 
-# Still need to fix:
-# use_subjects = ['bad_105']  # RuntimeError: Only 5/1262 good ECG epochs found
-# use_subjects = ['bad_116a']  # evoked[0].info['meas_id'] is not None / IndexError: list index out of range
-# use_subjects = ['bad_130a']  # no good epochs for ERM SSP
-# use_subjects = ['bad_225b']  # no good epochs for ERM SSP
-# use_subjects = ['bad_226b']  # no good epochs for ERM SSP
-# use_subjects = ['bad_302a']  # Expected 2 ERM projectors for channel type grad based on proj_nums but got 0 in /mnt/bakraid/larsoner/kam/badbaby/badbaby/data/bad_302a/sss_pca_fif/preproc_cont-proj.fif
-# use_subjects = ['bad_310b']  # RuntimeError: Only 7/1527 good ECG epochs found
-# Re-run epoching/cov/report for all to make sure no events are missing.
-
-continue_on_error = True
+continue_on_error = False
 for subject in use_subjects:
     params.subject_indices = [params.subjects.index(subject)]
     default = False
     try:
         mnefun.do_processing(
             params,
-            fetch_raw=True,
+            fetch_raw=default,
             do_score=default,
             do_sss=default,
             fetch_sss=default,
@@ -121,4 +107,5 @@ for subject in use_subjects:
         bad.append(subject)
     else:
         good.append(subject)
-print(f"Successfully processed {len(good)}/{len(good) + len(bad)}, bad:\n{bad}")
+print(
+    f"Successfully processed {len(good)}/{len(good) + len(bad)}, bad:\n{bad}")

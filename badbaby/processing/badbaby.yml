@@ -139,22 +139,101 @@ preprocessing:
         bad_110: [MEG0142, MEG0422, MEG0432, MEG1722],
         bad_113: [MEG0142, MEG1223, MEG1722, MEG1823, MEG2131],
         bad_114: [MEG0142, MEG0212, MEG0422, MEG2112, MEG2623, MEG2011],
-        bad_116a: [MEG0142, MEG0413, MEG1213, MEG1533, MEG1722, MEG2623, MEG1941, MEG2641],
-        bad_116b: [MEG0122, MEG0313, MEG0933, MEG1413, MEG1823, MEG2112, MEG2623, MEG2643, MEG1931],
+        bad_116a:
+          [
+            MEG0142,
+            MEG0413,
+            MEG1213,
+            MEG1533,
+            MEG1722,
+            MEG2623,
+            MEG1941,
+            MEG2641,
+          ],
+        bad_116b:
+          [
+            MEG0122,
+            MEG0313,
+            MEG0933,
+            MEG1413,
+            MEG1823,
+            MEG2112,
+            MEG2623,
+            MEG2643,
+            MEG1931,
+          ],
         bad_117a: [MEG0142, MEG0422, MEG1112, MEG1823, MEG2623],
         bad_118: [MEG0142, MEG1442],
         bad_119a: [MEG0142, MEG1543, MEG1722, MEG2623],
-        bad_119b: [MEG0122, MEG0713, MEG1433, MEG2112, MEG2623, MEG2643, MEG1631, MEG1931],
-        bad_120b: [MEG0122, MEG0713, MEG1433, MEG2112, MEG2643, MEG1631, MEG1821, MEG1931, MEG2531],
+        bad_119b:
+          [
+            MEG0122,
+            MEG0713,
+            MEG1433,
+            MEG2112,
+            MEG2623,
+            MEG2643,
+            MEG1631,
+            MEG1931,
+          ],
+        bad_120b:
+          [
+            MEG0122,
+            MEG0713,
+            MEG1433,
+            MEG2112,
+            MEG2643,
+            MEG1631,
+            MEG1821,
+            MEG1931,
+            MEG2531,
+          ],
         bad_122a: [MEG0142, MEG0422, MEG1543, MEG2623],
-        bad_122b: [MEG0122, MEG0333, MEG0812, MEG1223, MEG1432, MEG1543, MEG2112, MEG2623, MEG2643, MEG1931, MEG2611],
+        bad_122b:
+          [
+            MEG0122,
+            MEG0333,
+            MEG0812,
+            MEG1223,
+            MEG1432,
+            MEG1543,
+            MEG2112,
+            MEG2623,
+            MEG2643,
+            MEG1931,
+            MEG2611,
+          ],
         bad_123a: [MEG0142, MEG1023, MEG1413, MEG2112],
         bad_124a: [MEG0142, MEG0422, MEG1722, MEG2623, MEG0131],
         bad_124b: [MEG2112, MEG2623, MEG2643, MEG1931],
-        bad_125a: [MEG0122, MEG0313, MEG1542, MEG2112, MEG2532, MEG2623, MEG2643],
-        bad_127a: [MEG0122, MEG0413, MEG0422, MEG0933, MEG1723, MEG2112, MEG2113, MEG2623, MEG1931],
-        bad_127b: [MEG0122, MEG0222, MEG2112, MEG2532, MEG2623, MEG2643, MEG0911],
-        bad_128a: [MEG0422, MEG0933, MEG1413, MEG1523, MEG2112, MEG2623, MEG2643, MEG0611, MEG1041],
+        bad_125a:
+          [MEG0122, MEG0313, MEG1542, MEG2112, MEG2532, MEG2623, MEG2643],
+        bad_127a:
+          [
+            MEG0122,
+            MEG0413,
+            MEG0422,
+            MEG0933,
+            MEG1723,
+            MEG2112,
+            MEG2113,
+            MEG2623,
+            MEG1931,
+          ],
+        bad_127b:
+          [MEG0122, MEG0222, MEG2112, MEG2532, MEG2623, MEG2643, MEG0911],
+        bad_128a:
+          [
+            MEG0422,
+            MEG0933,
+            MEG1413,
+            MEG1523,
+            MEG2112,
+            MEG2623,
+            MEG2643,
+            MEG0611,
+            MEG1041,
+          ],
         bad_128b: [MEG0122, MEG2112, MEG2443, MEG2623, MEG2643, MEG1141],
         bad_130a: [MEG0621, MEG0933, MEG2112, MEG1831],
         bad_131a: [MEG0933, MEG2623, MEG1831],
@@ -162,42 +241,168 @@ preprocessing:
         bad_203: [MEG0142, MEG0313, MEG1442, MEG2532],
         bad_205: [MEG0142, MEG1442, MEG1722, MEG2623],
         bad_207: [MEG0422, MEG1643, MEG1722, MEG2623],
-        bad_209a: [MEG0142, MEG0422, MEG1533, MEG1722, MEG2512, MEG2623, MEG0111, MEG1141, MEG2431],
+        bad_209a:
+          [
+            MEG0142,
+            MEG0422,
+            MEG1533,
+            MEG1722,
+            MEG2512,
+            MEG2623,
+            MEG0111,
+            MEG1141,
+            MEG2431,
+          ],
         bad_211a: [MEG0142, MEG1112, MEG1442, MEG2112, MEG2623],
-        bad_211b: [MEG0122, MEG1423, MEG1432, MEG2112, MEG2213, MEG2623, MEG2643, MEG1931],
+        bad_211b:
+          [
+            MEG0122,
+            MEG1423,
+            MEG1432,
+            MEG2112,
+            MEG2213,
+            MEG2623,
+            MEG2643,
+            MEG1931,
+          ],
         bad_212: [MEG0142, MEG0413, MEG0331],
         bad_213: [MEG0142, MEG0422, MEG1213, MEG2113, MEG2623],
         bad_214: [MEG0142, MEG1442, MEG1722, MEG2532, MEG2623, MEG0711],
         bad_215a: [MEG0142, MEG1112, MEG1433],
-        bad_215b: [MEG0122, MEG0933, MEG2112, MEG2643, MEG0331, MEG1041, MEG1931, MEG2521],
+        bad_215b:
+          [
+            MEG0122,
+            MEG0933,
+            MEG2112,
+            MEG2643,
+            MEG0331,
+            MEG1041,
+            MEG1931,
+            MEG2521,
+          ],
         bad_217: [MEG0142, MEG0422, MEG1722, MEG2233, MEG2623, MEG0711],
         bad_218a: [MEG0142, MEG0313, MEG2532, MEG2623],
         bad_220a: [MEG0142, MEG0413, MEG0422, MEG0433, MEG1722],
         bad_220b: [MEG0122, MEG1723, MEG2112, MEG2643],
         bad_224a: [MEG0122, MEG2112, MEG1931],
         bad_224b: [MEG0122, MEG2112, MEG2623, MEG1931, MEG2521],
-        bad_225a: [MEG0122, MEG0113, MEG1223, MEG1823, MEG2112, MEG2623, MEG2311],
-        bad_225b: [MEG0122, MEG0422, MEG0922, MEG1143, MEG2112, MEG2623, MEG0641],
-        bad_226b: [MEG0122, MEG0422, MEG2141, MEG0922, MEG1143, MEG1723, MEG2112, MEG2623, MEG0641],
+        bad_225a:
+          [MEG0122, MEG0113, MEG1223, MEG1823, MEG2112, MEG2623, MEG2311],
+        bad_225b:
+          [MEG0122, MEG0422, MEG0922, MEG1143, MEG2112, MEG2623, MEG0641],
+        bad_226b:
+          [
+            MEG0122,
+            MEG0422,
+            MEG2141,
+            MEG0922,
+            MEG1143,
+            MEG1723,
+            MEG2112,
+            MEG2623,
+            MEG0641,
+          ],
         bad_228a: [MEG0122, MEG0313, MEG0422, MEG0733, MEG0641, MEG2643],
         bad_229b: [MEG0122, MEG0433, MEG2112, MEG2612, MEG2623, MEG2643],
-        bad_231b: [MEG0122, MEG0212, MEG0422, MEG0933, MEG2112, MEG2113, MEG2512, MEG2542, MEG2623],
+        bad_231b:
+          [
+            MEG0122,
+            MEG0212,
+            MEG0422,
+            MEG0933,
+            MEG2112,
+            MEG2113,
+            MEG2512,
+            MEG2542,
+            MEG2623,
+          ],
         bad_301a: [MEG0142, MEG2113, MEG2432, MEG2532, MEG2623, MEG0611],
         bad_302a: [MEG0122, MEG0142, MEG0422, MEG2623],
-        bad_304a: [MEG0122, MEG0142, MEG0212, MEG0413, MEG2112, MEG1941, MEG2431],
-        bad_309a: [MEG0122, MEG0432, MEG1042, MEG1542, MEG2112, MEG2542, MEG2623, MEG2643, MEG1931],
+        bad_304a:
+          [MEG0122, MEG0142, MEG0212, MEG0413, MEG2112, MEG1941, MEG2431],
+        bad_309a:
+          [
+            MEG0122,
+            MEG0432,
+            MEG1042,
+            MEG1542,
+            MEG2112,
+            MEG2542,
+            MEG2623,
+            MEG2643,
+            MEG1931,
+          ],
         bad_310a: [MEG0122, MEG0322, MEG1023, MEG2112, MEG2623, MEG2643],
         bad_310b: [MEG0122, MEG1723, MEG2112, MEG2623, MEG1711, MEG1931],
-        bad_311a: [MEG0122, MEG0422, MEG0933, MEG1413, MEG1523, MEG1542, MEG2112, MEG2623, MEG2643, MEG0611, MEG1931, MEG2521],
+        bad_311a:
+          [
+            MEG0122,
+            MEG0422,
+            MEG0933,
+            MEG1413,
+            MEG1523,
+            MEG1542,
+            MEG2112,
+            MEG2623,
+            MEG2643,
+            MEG0611,
+            MEG1931,
+            MEG2521,
+          ],
         bad_311b: [MEG0122, MEG2112, MEG2623, MEG2643, MEG1931, MEG2521],
-        bad_312a: [MEG0122, MEG2112, MEG2113, MEG2623, MEG2643, MEG1421, MEG1431, MEG1931, MEG2521],
-        bad_312b: [MEG0122, MEG1723, MEG2112, MEG2623, MEG2643, MEG0331, MEG1041, MEG2011, MEG2521],
-        bad_314a: [MEG0122, MEG0533, MEG1413, MEG1523, MEG2113, MEG2623, MEG2643, MEG1931],
-        bad_316b: [MEG0122, MEG0413, MEG1433, MEG2112, MEG2532, MEG2643, MEG2521],
+        bad_312a:
+          [
+            MEG0122,
+            MEG2112,
+            MEG2113,
+            MEG2623,
+            MEG2643,
+            MEG1421,
+            MEG1431,
+            MEG1931,
+            MEG2521,
+          ],
+        bad_312b:
+          [
+            MEG0122,
+            MEG1723,
+            MEG2112,
+            MEG2623,
+            MEG2643,
+            MEG0331,
+            MEG1041,
+            MEG2011,
+            MEG2521,
+          ],
+        bad_314a:
+          [
+            MEG0122,
+            MEG0533,
+            MEG1413,
+            MEG1523,
+            MEG2113,
+            MEG2623,
+            MEG2643,
+            MEG1931,
+          ],
+        bad_316b:
+          [MEG0122, MEG0413, MEG1433, MEG2112, MEG2532, MEG2643, MEG2521],
         bad_921a: [MEG0142, MEG0422, MEG1643, MEG1722, MEG2623, MEG2643],
         bad_921b: [MEG0122, MEG0233, MEG0413, MEG2112, MEG2623, MEG2643],
-        bad_923b: [MEG0122, MEG0422, MEG1723, MEG1823, MEG2112, MEG2532, MEG2623, MEG2643, MEG1931],
-        bad_925b: [MEG0122, MEG0413, MEG2112, MEG2623, MEG2643, MEG1931, MEG2521],
+        bad_923b:
+          [
+            MEG0122,
+            MEG0422,
+            MEG1723,
+            MEG1823,
+            MEG2112,
+            MEG2532,
+            MEG2623,
+            MEG2643,
+            MEG1931,
+          ],
+        bad_925b:
+          [MEG0122, MEG0413, MEG2112, MEG2623, MEG2643, MEG1931, MEG2521],
       }
     mf_autobad: True
     mf_autobad_type: python
@@ -230,8 +435,20 @@ preprocessing:
     cont_hp_trans: 2
     cont_lp: 40
     cont_lp_trans: 2
+    cont_reject: {
+      __default__: { grad: 1500.e-13, mag: 5000.e-15 },
+      bad_130a: { grad: 1500.e-13, mag: 20000.e-15 },
+      bad_225b: { grad: 1500.e-13, mag: 20000.e-15 },
+      bad_226b: { grad: 1500.e-13, mag: 20000.e-15 },
+    }
     proj_nums: { __default__: [[1, 1, 0], [0, 0, 0], [2, 2, 0]] }
     ecg_t_lims: [-0.04, 0.04]
+    ssp_ecg_reject:
+      {
+        __default__: { grad: 2000.e-13, mag: 3000.e-15 },
+        bad_105: { grad: 2000.e-13, mag: 5000.e-15 },  # Huge ECG signals
+        bad_310b: { grad: 2000.e-13, mag: 5000.e-15 },
+      }
     proj_sfreq: 200
     proj_ave: True
     proj_meg: combined
