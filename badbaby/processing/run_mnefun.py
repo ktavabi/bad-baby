@@ -80,9 +80,20 @@ params.score = score
 # Set what will run
 good, bad = list(), list()
 use_subjects = params.subjects
-# use_subjects = ['bad_130a', 'bad_225b', 'bad_226b']
+# use_subjects = use_subjects[use_subjects.index('bad_209a'):][:1]
 
-continue_on_error = False
+# Still need to fix:
+# use_subjects = ['bad_105']  # RuntimeError: Only 5/1262 good ECG epochs found
+# use_subjects = ['bad_116a']  # evoked[0].info['meas_id'] is not None / IndexError: list index out of range
+# use_subjects = ['bad_130a']  # no good epochs for ERM SSP
+# use_subjects = ['bad_225b']  # no good epochs for ERM SSP
+# use_subjects = ['bad_226b']  # no good epochs for ERM SSP
+# use_subjects = ['bad_302a']  # Expected 2 ERM projectors for channel type grad based on proj_nums but got 0 in /mnt/bakraid/larsoner/kam/badbaby/badbaby/data/bad_302a/sss_pca_fif/preproc_cont-proj.fif
+# use_subjects = ['bad_310b']  # RuntimeError: Only 7/1527 good ECG epochs found
+# use_subjects = ['bad_925b']  # ValueError: extended_proj[0] channel names (length 299) do not match the good MEG channel names (length 297)
+# Re-run epoching/cov/report for all to make sure no events are missing.
+
+continue_on_error = True
 for subject in use_subjects:
     params.subject_indices = [params.subjects.index(subject)]
     default = False
