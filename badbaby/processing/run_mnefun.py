@@ -79,8 +79,8 @@ params.score = score
 
 # Set what will run
 good, bad = list(), list()
-# use_subjects = params.subjects
-use_subjects = ['bad_925b']
+use_subjects = params.subjects
+# use_subjects = ['bad_925b']
 
 # Still need to fix:
 # use_subjects = ['bad_105']  # RuntimeError: Only 5/1262 good ECG epochs found
@@ -101,15 +101,16 @@ for subject in use_subjects:
         mnefun.do_processing(
             params,
             fetch_raw=default,
-            do_score=default,
-            do_sss=default,
+            do_score=True,
+            do_sss=True,
             do_ch_fix=default,
-            gen_ssp=default,
-            apply_ssp=default,
+            gen_ssp=True,
+            apply_ssp=True,
             write_epochs=True,
-            gen_covs=default,
-            gen_report=default,
-            print_status=default,
+            gen_covs=True,
+            gen_report=True,
+            
+            print_status=True,
         )
     except Exception:
         if not continue_on_error:
