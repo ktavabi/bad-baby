@@ -8,8 +8,13 @@ runs were 104, 114 , 120b, 127b, 130a, 203, 209a, 213 , 217	bad_231b, 304a,
 921a. Files were uploaded to /data06/larsoner/for_hank/brainstudio with
 variants of:
 
-$ rsync -a --rsh="ssh -o KexAlgorithms=diffie-hellman-group1-sha1" --partial --progress --include="*_raw.fif" --include="*_raw-1.fif" --exclude="*" /media/ktavabi/ALAYA/data/ilabs/badbaby/*/bad_114/raw_fif/* larsoner@kasga.ilabs.uw.edu:/data06/larsoner/for_hank/brainstudio
->>> mne.io.read_raw_fif('../mismatch/bad_114/raw_fif/bad_114_mmn_raw.fif', allow_maxshield='yes').info['meas_date'].strftime('%y%m%d')
+$ rsync -a --rsh="ssh -o KexAlgorithms=diffie-hellman-group1-sha1"
+--partial --progress --include="*_raw.fif" --include="*_raw-1.fif"
+--exclude="*" /media/ktavabi/ALAYA/data/ilabs/badbaby/*/bad_114/raw_fif/*
+larsoner@kasga.ilabs.uw.edu:/data06/larsoner/for_hank/brainstudio
+
+$ mne.io.read_raw_fif('../mismatch/bad_114/raw_fif/bad_114_mmn_raw.fif',
+allow_maxshield='yes').info['meas_date'].strftime('%y%m%d')
 
 Then repackaged manually into brainstudio/bad_baby/bad_*/*/ directories
 based on the recording dates (or just using 111111 for simplicity).
@@ -80,7 +85,7 @@ params.score = score
 # Set what will run
 good, bad = list(), list()
 # use_subjects = params.subjects
-use_subjects = ['bad_925b']
+use_subjects = ["bad_310b"]
 
 # Still need to fix:
 # use_subjects = ['bad_105']  # RuntimeError: Only 5/1262 good ECG epochs found
@@ -108,8 +113,8 @@ for subject in use_subjects:
             apply_ssp=default,
             write_epochs=True,
             gen_covs=default,
-            gen_report=default,
-            print_status=default,
+            gen_report=True,
+            print_status=True,
         )
     except Exception:
         if not continue_on_error:
@@ -118,5 +123,4 @@ for subject in use_subjects:
         bad.append(subject)
     else:
         good.append(subject)
-print(
-    f"Successfully processed {len(good)}/{len(good) + len(bad)}, bad:\n{bad}")
+print(f"Successfully processed {len(good)}/{len(good) + len(bad)}, bad:\n{bad}")
