@@ -13,7 +13,8 @@ import numpy as np
 from pytz import timezone
 
 import mne
-from mnefun import extract_expyfun_events
+from mne.epochs import combine_event_ids
+from mnefun import extract_expyfun_events, read_params
 from expyfun.io import read_tab
 
 # Badbaby stimuli files
@@ -141,3 +142,24 @@ def score(p, subjects):
                 )
             )
             mne.write_events(fname_out, events)
+
+
+def eq_trials(epochs, analysis, nn, in_names_match, names, numbers):
+    """Equalize trial counts."""
+    # Someday we should pass these in...
+    off = max(epochs.events[:, 2].max(), nn.max()) + 1
+    assert analysis in 'All Individual Oddball AM IDs'.split(), analysis
+    if analysis != 'Oddball':
+        return  # signal to use default method
+    print(f'      Equalizing with sub-condition matching: {in_names_match}')
+    assert in_names_match == ['std', 'ba', 'wa'], in_names_match
+    assert names == ['standard', 'deviant'], names
+    epochs = epochs[in_names_match]
+    epochs.equalize_event_counts(['ba', 'wa'])
+    for idx, collapse in enumerate((['std'], ['ba', 'wa'])):
+        combine_event_ids(
+            epochs, collapse, {names[idx]: numbers[idx] + off}, copy=False)
+        epochs.events[epochs.events[:, 2] == numbers[idx] + off, 2] -= off
+        epochs.event_id[names[idx]] = numbers[idx]
+    epochs.equalize_event_counts(['standard', 'deviant'])
+    return epochs

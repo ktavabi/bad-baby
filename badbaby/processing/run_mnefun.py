@@ -8,8 +8,13 @@ runs were 104, 114 , 120b, 127b, 130a, 203, 209a, 213 , 217	bad_231b, 304a,
 921a. Files were uploaded to /data06/larsoner/for_hank/brainstudio with
 variants of:
 
-$ rsync -a --rsh="ssh -o KexAlgorithms=diffie-hellman-group1-sha1" --partial --progress --include="*_raw.fif" --include="*_raw-1.fif" --exclude="*" /media/ktavabi/ALAYA/data/ilabs/badbaby/*/bad_114/raw_fif/* larsoner@kasga.ilabs.uw.edu:/data06/larsoner/for_hank/brainstudio
->>> mne.io.read_raw_fif('../mismatch/bad_114/raw_fif/bad_114_mmn_raw.fif', allow_maxshield='yes').info['meas_date'].strftime('%y%m%d')
+$ rsync -a --rsh="ssh -o KexAlgorithms=diffie-hellman-group1-sha1"
+--partial --progress --include="*_raw.fif" --include="*_raw-1.fif"
+--exclude="*" /media/ktavabi/ALAYA/data/ilabs/badbaby/*/bad_114/raw_fif/*
+larsoner@kasga.ilabs.uw.edu:/data06/larsoner/for_hank/brainstudio
+
+$ mne.io.read_raw_fif('../mismatch/bad_114/raw_fif/bad_114_mmn_raw.fif',
+allow_maxshield='yes').info['meas_date'].strftime('%y%m%d')
 
 Then repackaged manually into brainstudio/bad_baby/bad_*/*/ directories
 based on the recording dates (or just using 111111 for simplicity).
@@ -79,8 +84,13 @@ params.score = score
 
 # Set what will run
 good, bad = list(), list()
+<<<<<<< HEAD
+# use_subjects = params.subjects
+use_subjects = ["bad_310b"]
+=======
 use_subjects = params.subjects
-# use_subjects = use_subjects[use_subjects.index('bad_209a'):][:1]
+# use_subjects = ['bad_925b']
+>>>>>>> 4a1b62d1876a87c54bb18097046bc143b4c6a3d5
 
 # Still need to fix:
 # use_subjects = ['bad_105']  # RuntimeError: Only 5/1262 good ECG epochs found
@@ -93,7 +103,7 @@ use_subjects = params.subjects
 # use_subjects = ['bad_925b']  # ValueError: extended_proj[0] channel names (length 299) do not match the good MEG channel names (length 297)
 # Re-run epoching/cov/report for all to make sure no events are missing.
 
-continue_on_error = True
+continue_on_error = False
 for subject in use_subjects:
     params.subject_indices = [params.subjects.index(subject)]
     default = False
@@ -102,16 +112,14 @@ for subject in use_subjects:
             params,
             fetch_raw=default,
             do_score=True,
-            push_raw=default,
             do_sss=True,
-            fetch_sss=default,
-            do_ch_fix=True,
+            do_ch_fix=default,
             gen_ssp=True,
             apply_ssp=True,
             write_epochs=True,
-            gen_covs=True,
+            gen_covs=default,
             gen_report=True,
-            print_status=default,
+            print_status=True,
         )
     except Exception:
         if not continue_on_error:
@@ -120,5 +128,4 @@ for subject in use_subjects:
         bad.append(subject)
     else:
         good.append(subject)
-print(
-    f"Successfully processed {len(good)}/{len(good) + len(bad)}, bad:\n{bad}")
+print(f"Successfully processed {len(good)}/{len(good) + len(bad)}, bad:\n{bad}")

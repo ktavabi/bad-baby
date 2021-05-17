@@ -123,9 +123,9 @@ scoring:
 
 preprocessing:
   multithreading:
-    n_jobs: 4
-    n_jobs_fir: 4
-    n_jobs_resample: 4
+    n_jobs: "cuda"
+    n_jobs_fir: "cuda"
+    n_jobs_resample: "cuda"
   bads:
     mf_prebad:
       {
@@ -487,7 +487,7 @@ epoching:
       [-1, -1, -1, 1, -1, -1, -1, -1, -1],
       [-1, -1, -1, -1, 1, 2, 3, 4, 5],
     ]
-  must_match: [[], [1, 2, 3], [1, 2], [], []]
+  must_match: [[], [0, 1, 2], [0, 1], [], []]  # 0-based indices
 
 covariance:
   cov_method: shrunk
@@ -504,10 +504,9 @@ report:
   whitening: [{ analysis: All, name: All }]
   sensor:
     [
-      { analysis: All, name: All, times: "peaks", proj: False },
-      { analysis: All, name: All, times: "peaks" },
-      { analysis: All, name: All, times: "peaks", proj: "reconstruct" },
-      { analysis: Oddball, name: standard, times: "peaks" },
-      { analysis: Oddball, name: deviant, times: "peaks" },
-      { analysis: AM, name: tone, times: "peaks" },
+      { analysis: All, name: All, times: "peaks", proj: False},
+      { analysis: All, name: All, times: "peaks", proj: "reconstruct"},
+      { analysis: Oddball, name: standard, times: "peaks", proj: "reconstruct"},
+      { analysis: Oddball, name: deviant, times: "peaks", proj: "reconstruct"},
+      { analysis: AM, name: tone, times: "peaks", proj: "reconstruct"},
     ]
