@@ -34,7 +34,7 @@ import janitor  # noqa
 import mnefun
 import pandas as pd
 
-from score import score
+from score import score, eq_trials
 
 static = op.join(Path(__file__).parents[1], "static")
 
@@ -81,6 +81,7 @@ params = mnefun.read_params(
 params.work_dir = "/media/ktavabi/ALAYA/data/ilabs/badbaby"
 params.ecg_channel = ecg_channel
 params.score = score
+<<<<<<< HEAD
 
 # Set what will run
 good, bad = list(), list()
@@ -91,6 +92,14 @@ use_subjects = ["bad_310b"]
 use_subjects = params.subjects
 # use_subjects = ['bad_925b']
 >>>>>>> 4a1b62d1876a87c54bb18097046bc143b4c6a3d5
+=======
+params.match_fun = eq_trials
+
+# Set what will run
+good, bad = list(), list()
+# use_subjects = params.subjects
+use_subjects = ["bad_310b"]
+>>>>>>> fix
 
 # Still need to fix:
 # use_subjects = ['bad_105']  # RuntimeError: Only 5/1262 good ECG epochs found
@@ -111,6 +120,7 @@ for subject in use_subjects:
         mnefun.do_processing(
             params,
             fetch_raw=default,
+<<<<<<< HEAD
             do_score=True,
             do_sss=True,
             do_ch_fix=default,
@@ -120,6 +130,17 @@ for subject in use_subjects:
             gen_covs=default,
             gen_report=True,
             print_status=True,
+=======
+            do_score=default,
+            do_sss=default,
+            do_ch_fix=default,
+            gen_ssp=default,
+            apply_ssp=default,
+            write_epochs=True,
+            gen_covs=default,
+            gen_report=default,
+            print_status=default,
+>>>>>>> fix
         )
     except Exception:
         if not continue_on_error:
