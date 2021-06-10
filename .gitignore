@@ -153,3 +153,5 @@ cython_debug/
 data/
 badbaby/.DS_Store
 *.code-workspace
+.gitignore
+badbaby/analysis/results/*
