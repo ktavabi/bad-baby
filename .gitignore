@@ -155,3 +155,4 @@ badbaby/.DS_Store
 *.code-workspace
 .gitignore
 badbaby/analysis/results/*
+badbaby/processing/badbaby.code-workspace
