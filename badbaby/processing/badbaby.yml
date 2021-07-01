@@ -458,7 +458,7 @@ epoching:
   tmin: -0.2
   tmax: 1.3
   baseline: Null
-  bmin: -0.1
+  bmin: -0.2
   bmax: 0
   epochs_proj: delayed
   autoreject_thresholds: True
