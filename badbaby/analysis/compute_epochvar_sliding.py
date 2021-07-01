@@ -3,6 +3,7 @@
 """
 Todo:
 - Add plotting as a function of time for each contrast
+- Convert into notebook
 """
 
 import itertools

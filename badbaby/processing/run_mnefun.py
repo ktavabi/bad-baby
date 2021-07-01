@@ -84,8 +84,8 @@ params.score = score
 
 # Set what will run
 good, bad = list(), list()
-use_subjects = params.subjects
-# use_subjects = ['bad_925b']
+# use_subjects = params.subjects
+use_subjects = ['bad_925b']
 params.match_fun = eq_trials
 
 # Still need to fix:
@@ -106,13 +106,13 @@ for subject in use_subjects:
     try:
         mnefun.do_processing(
             params,
-            do_score=True,
-            do_sss=True,
-            do_ch_fix=True,
-            gen_ssp=True,
-            apply_ssp=True,
+            do_score=default,
+            do_sss=default,
+            do_ch_fix=default,
+            gen_ssp=default,
+            apply_ssp=default,
             write_epochs=True,
-            gen_covs=True,
+            gen_covs=default,
             gen_report=True,
             print_status=True,
         )
